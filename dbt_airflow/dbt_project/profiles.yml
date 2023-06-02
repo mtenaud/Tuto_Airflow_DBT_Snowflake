@@ -1,0 +1,19 @@
+default:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      ######## Please replace with your Snowflake account name 
+      ######## for example sg_demo.ap-southeast-1
+      account: IPPONPARTNER.AWS_EU_WEST_1
+
+      user: "{{ env_var('196530') }}"
+      ######## These environment variables dbt_user and dbt_password 
+      ######## are read from the variabls in Airflow which we will set later
+      password: "{{ env_var('Testing4!') }}"
+
+      role: MTENAUD_ROLE
+      database: MTENAUD_DB
+      warehouse: MTENAUD_WH_XS
+      schema: public
+      threads: 200

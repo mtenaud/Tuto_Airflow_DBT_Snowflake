@@ -58,6 +58,8 @@ services:
     command: webserver
     ports:
       - 8080:8080
+    volumes:
+      - ~/.dbt/profiles.yml:/root/.dbt/profiles.yml # Add this line
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
       interval: 10s
@@ -68,6 +70,9 @@ services:
   airflow-scheduler:
     <<: *airflow-common
     command: scheduler
+    volumes:
+      - ./Airflow_DBT_Snowflake:/dbt # update the volume mapping here
+      - ./dags:/opt/airflow/dags 
     healthcheck:
       test: ["CMD-SHELL", 'airflow jobs check --job-type SchedulerJob --hostname "$${HOSTNAME}"']
       interval: 10s
